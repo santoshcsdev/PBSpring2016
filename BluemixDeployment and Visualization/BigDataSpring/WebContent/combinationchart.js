@@ -1,99 +1,96 @@
-var letters=[];
-var frequencys=[];
-var obj;
+/**
+ * Created by santoshkumar on 4/7/16.
+ */
+
+
+var screenname0;
+var screenname1;
+var screenname2;
+var followerscount0;
+var favoritescount0;
+var friendscount0;
+
+var followerscount1;
+var favoritescount1;
+var friendscount1;
+
+var followerscount2;
+var favoritescount2;
+var friendscount2;
+
+
 $(function () {
 
-
-    //alert('hi');
-    //get data from mongo lab
-
-
-    $.get("https://api.mlab.com/api/1/databases/studentcorner/collections/PB_Project?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
+    $.get("https://api.mlab.com/api/1/databases/pb/collections/query3?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
 
         //alert('hello');
-         obj= jsonDetails;
+        //var obj= JSON.parse(jsonDetails);
         //alert('hi');
         //alert(jsonDetails[0].);
-        for(var i=0;i<obj.length;i++){
+        /*for(var i=0;i<jsonDetails.length;i++){
 
-            letters[i]=obj[i].Player;
-            frequencys[i]=obj[i].Tweets;
-        }
+         letters[i]=jsonDetails[i].letter;
+         frequencys[i]=jsonDetails[i].frequency;
+         }*/
 
-        //alert(letters[0]);
-    /*$http({
-     method:'GET',
-     url:'https://api.mlab.com/api/1/databases/studentcorner/collections/PB_Project?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO'
-     }).success(function(jsonDetails) {
 
-     alert('hi');
+        //alert(jsonDetails[0].screen_name0);
 
-     var obj= JSON.parse(jsonDetails);
 
-     for(var i=0;i<obj.length;i++){
-     letter[i]=obj[i].letter;
-     frequency[i]=obj[i].frequency;
-     }
+        screenname0=jsonDetails[0].screen_name0;
+        screenname1=jsonDetails[0].screen_name1;
+        screenname2=jsonDetails[0].screen_name2;
+        followerscount0=jsonDetails[0].followers_count0;
+        followerscount1=jsonDetails[0].followers_count1;
+        followerscount2=jsonDetails[0].followers_count2;
 
-     })*/
-    // Create the chart
+        favoritescount0=jsonDetails[0].favorites_count0;
+        favoritescount1=jsonDetails[0].favorites_count1;
+        favoritescount2=jsonDetails[0].favorites_count2;
+
+        friendscount0=jsonDetails[0].friends_count0;
+        friendscount1=jsonDetails[0].friends_count1;
+
+        friendscount2=jsonDetails[0].friends_count2;
+
+    alert(screenname0);
+
+
+
+    })
+
+   // alert(screenname0);
+
     $('#container').highcharts({
-        chart: {
-            type: 'column'
-        },
         title: {
-            text: 'Popular player from India'
-        },
-        subtitle: {
-            text: ''
+            text: 'Popular users'
         },
         xAxis: {
-            type: 'Player'
+            categories: ['followers_count', 'favourites_count', 'friends_count']
         },
-        yAxis: {
-            title: {
-                text: 'No of tweets on him'
-            }
-
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-
-                    enabled: true,
-                    format: '{point.y}'
+        labels: {
+            items: [{
+                html: 'followers_count=value*10000',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
                 }
-            }
+            }]
         },
-
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
-        },
-
         series: [{
-            name: 'Player',
-            colorByPoint: true,
-            data: [{
-                name: letters[0],
-                y: frequencys[0]
-
-            }, {
-                name: letters[1],
-                y: frequencys[1]
-
-            },
-                {
-                    name: letters[2],
-                    y: frequencys[2]
-
-                }]
+            type: 'column',
+            name: screenname0,
+            data: [favoritescount0/10000,followerscount0,friendscount0]
+        }, {
+            type: 'column',
+            name: screenname1,
+            data: [favoritescount1/10000, followerscount1, friendscount1]
+        }, {
+            type: 'column',
+            name: screenname2,
+            data: [favoritescount2/10000, followerscount2, friendscount2]
         }]
     });
-    });
-
 });
+

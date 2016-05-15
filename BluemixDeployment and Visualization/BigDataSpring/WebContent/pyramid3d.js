@@ -1,7 +1,22 @@
 /**
  * Created by santoshkumar on 4/7/16.
  */
+
+var letters=[];
+var users=[];
 $(function () {
+
+    $.get("https://api.mlab.com/api/1/databases/pb/collections/query2?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
+
+        //alert('hello');
+        obj= jsonDetails;
+        //alert('hi');
+        //alert(jsonDetails[0].);
+        for(var i=0;i<obj.length;i++){
+
+            letters[i]=obj[i].Language;
+            users[i]=obj[i].Tweets;
+        }
 
     $('#container').highcharts({
         chart: {
@@ -28,18 +43,19 @@ $(function () {
         series: [{
             name: 'Unique users',
             data: [
-                ['en(English)',152522],
-                ['hi(Hindi)',15534],
-                ['in(Indonesian)',8055],
-                ['und(Un-Determined)',7273],
-                ['ur(Urdu)',4057],
-                ['tl(Tagalog)',3916],
-                ['et(Estonian)',2634],
-                ['ht(Haitian Creole)',1373],
-                ['pl(Polish)',1246],
-                ['de(German)',1097],
+                [letters[0],users[0]],
+                [letters[1],users[1]],
+                [letters[2],users[2]],
+                [letters[3],users[3]],
+                [letters[4],users[4]],
+                [letters[5],users[5]],
+                [letters[6],users[6]],
+                [letters[7],users[7]],
+                [letters[8],users[8]],
+                [letters[9],users[9]],
 
             ]
         }]
+    });
     });
 });

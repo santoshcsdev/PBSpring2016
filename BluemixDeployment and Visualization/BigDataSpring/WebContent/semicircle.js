@@ -1,4 +1,19 @@
+var userStatus=[];
+var users=[];
+
 $(function () {
+
+    $.get("https://api.mlab.com/api/1/databases/pb/collections/query4?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
+
+        //alert('hello');
+        obj= jsonDetails;
+        //alert('hi');
+        //alert(jsonDetails[0].);
+        for(var i=0;i<obj.length;i++){
+
+            userStatus[i]=obj[i].userStatus;
+            users[i]=obj[i].users;
+        }
     $('#container').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -35,8 +50,8 @@ $(function () {
             name: '',
             innerSize: '50%',
             data: [
-                ['verified users ', 270  ],
-                ['non-verified users', 820.17],
+                [userStatus[0], users[0] ],
+                [userStatus[1], users[1]],
                 {
                     name: 'Proprietary or Undetectable',
                     y: 0.2,
@@ -46,6 +61,7 @@ $(function () {
                 }
             ]
         }]
+    });
     });
 });
 /**

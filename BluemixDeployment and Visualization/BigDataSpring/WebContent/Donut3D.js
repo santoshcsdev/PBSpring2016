@@ -1,4 +1,19 @@
+var letters=[];
+var users=[];
+
 $(function () {
+
+    $.get("https://api.mlab.com/api/1/databases/pb/collections/query1?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
+
+        //alert('hello');
+        obj= jsonDetails;
+        //alert('hi');
+        //alert(jsonDetails[0].);
+        for(var i=0;i<obj.length;i++){
+
+            letters[i]=obj[i].Letters;
+            users[i]=obj[i].Users;
+        }
     $('#container').highcharts({
         chart: {
             type: 'pie',
@@ -22,12 +37,13 @@ $(function () {
         series: [{
             name: 'Number of Users',
             data: [
-                ['A-E(44067)', 44067],
-                ['F-J(23398)', 23398],
-                ['K-O(31322)', 31322],
-                ['P-T(49466)', 49466],
-                ['U-Z(12771)', 12771]
+                [letters[0]+'('+users[0]+')', users[0]],
+                [letters[1]+'('+users[1]+')', users[1]],
+                [letters[2]+'('+users[2]+')', users[2]],
+                [letters[3]+'('+users[3]+')', users[3]],
+                [letters[4]+'('+users[4]+')', users[4]]
             ]
         }]
+    });
     });
 });

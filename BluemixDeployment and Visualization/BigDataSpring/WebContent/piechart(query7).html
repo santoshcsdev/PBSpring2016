@@ -2,29 +2,47 @@
 <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
+        var users_status=[];
+        var users=[];
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Users', 'Count'],
-                ['Verified(3558)', 3558], ['Non-verified(201111)', 201111]
 
-            ]);
+        $.get("https://api.mlab.com/api/1/databases/pb/collections/query7?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
 
-            var options = {
-                title: 'Verified vs non-verified users',
-                legend: 'none',
-                pieSliceText: 'label',
-                slices: {  4: {offset: 0.2},
-                    12: {offset: 0.3},
-                    14: {offset: 0.4},
-                    15: {offset: 0.5},
-                },
-            };
+            //alert('hello');
+            obj = jsonDetails;
+            //alert('hi');
+            //alert(jsonDetails[0].);
+            for (var i = 0; i < obj.length; i++) {
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-        }
+                users_status[i] = obj[i].users_status;
+                users[i] = obj[i].users;
+            }
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Users', 'Count'],
+                    [users_status[0]+'('+users[0]+')', users[0]], [users_status[1]+'('+users[1]+')', users[1]]
+
+                ]);
+
+                var options = {
+                    title: 'Verified vs non-verified users',
+                    legend: 'none',
+                    pieSliceText: 'label',
+                    slices: {
+                        4: {offset: 0.2},
+                        12: {offset: 0.3},
+                        14: {offset: 0.4},
+                        15: {offset: 0.5},
+                    },
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        });
     </script>
 </head>
 <body>

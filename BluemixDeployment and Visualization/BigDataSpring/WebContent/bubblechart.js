@@ -1,7 +1,24 @@
 /**
  * Created by santoshkumar on 4/7/16.
  */
+
+var userRegistered=[];
+var years=[]
 $(document).ready(function () {
+
+    $.get("https://api.mlab.com/api/1/databases/pb/collections/query6?apiKey=Q_u73BV4oOdMGpnu3WFGmJ8YH_lxHDHO", {},function (jsonDetails) {
+
+        //alert('hello');
+        obj= jsonDetails;
+        //alert('hi');
+        //alert(jsonDetails[0].);
+        for(var i=0;i<obj.length;i++){
+
+            years[i]=obj[i].years;
+            userRegistered[i]=obj[i].userRegistered;
+        }
+
+
     var bubbleChart = new d3.svg.BubbleChart({
         supportResponsive: true,
         //container: => use @default
@@ -16,10 +33,10 @@ $(document).ready(function () {
         //circleColor: use @default
         data: {
             items: [
-                {text: "(2006-2008)", count: "1975"},
-                {text: "(2009-2011)", count: "73475"},
-                {text: "(2012-2014)", count: "80550"},
-                {text: "(2015-2016)", count: "48669"},
+                {text: years[0], count: userRegistered[0]},
+                {text: years[1], count: userRegistered[1]},
+                {text: years[2], count: userRegistered[2]},
+                {text: years[3], count: userRegistered[3]},
             ],
             eval: function (item) {return item.count;},
             classed: function (item) {return item.text.split(" ").join("");}
@@ -90,5 +107,6 @@ $(document).ready(function () {
                     ]
                 }
             }]
+    });
     });
 });
