@@ -1,0 +1,6 @@
+---
+applications:
+- name: BigDataSpringDeployment
+  memory: 512M
+  host: BigDataSpringDeployment
+  domain: mybluemix.net
