@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualization of Tweets</title>
+    <script>
+        function query1(){
+            document.getElementById('frame').src='donut(query1).html';
+        }
+
+        function query2(){
+            document.getElementById('frame').src='pyramid(query2).html';
+        }
+        function query3(){
+            document.getElementById('frame').src='combinationchart(query3).html';
+        }
+        function query4(){
+            document.getElementById('frame').src='semicircle(query4).html';
+        }
+        function query5(){
+            document.getElementById('frame').src='barchart(query5).html';
+        }
+        function query6(){
+            document.getElementById('frame').src='bubblechart(query6).html';
+        }
+        function query7(){
+            document.getElementById('frame').src='piechart(query7).html';
+        }
+        function query8(){
+            document.getElementById('frame').src='worldmap(query8).html';
+        }
+    </script>
+    <style>
+
+
+        .button {
+            display: inline-block;
+            border-radius: 2.5px;
+            background-color: #2629f4;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 18px;
+            padding: 10px;
+            width: 130px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        body {
+            background-image: url("tweet1.png");
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            margin-right: 100px;
+            background-attachment: fixed;
+        }
+    </style>
+
+</head>
+<body >
+<h2 style="color: green;">Visualization of Tweets</h2>
+<!--<div style="top:100px; left:45px;">-->
+<button onclick="query1()" class="button" style="vertical-align:middle"><span>Query1</span></button>
+<button onclick="query2()" class="button" style="vertical-align:middle"><span>Query2</span></button>
+<button onclick="query3()" class="button" style="vertical-align:middle"><span>Query3</span></button>
+<button onclick="query4()" class="button" style="vertical-align:middle"><span>Query4</span></button>
+<button onclick="query5()" class="button" style="vertical-align:middle"><span>Query5</span></button>
+<button onclick="query6()" class="button" style="vertical-align:middle"><span>Query6</span></button>
+<button onclick="query7()" class="button" style="vertical-align:middle"><span>Query7</span></button>
+<button onclick="query8()" class="button" style="vertical-align:middle"><span>Query8</span></button>
+<br><br>
+
+
+<div style="left:30px;">
+<iframe id='frame' src='' style="height: 550px; width:1000px;"></iframe></div>
+</body>
+</html>
